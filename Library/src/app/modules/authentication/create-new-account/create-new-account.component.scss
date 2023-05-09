@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+.text-center {
+  font-size: 60px;
+  margin-bottom: 40px;
+}
+
+.field {
+  padding: 5px;
+  width: 20%;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.button {
+  margin-top: 25px;
+  padding: 20px 10px;
+  font-size: 15px;
+  width: 300px;
+}
+
+.error {
+  font-size: 14px;
+}

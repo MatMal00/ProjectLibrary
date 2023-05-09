@@ -1,0 +1,31 @@
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0 0;
+
+  .page-title {
+    font-size: 80px;
+  }
+
+  .page-subtitle {
+    color: red;
+    font-size: 50px;
+  }
+}
+
+.wrapper {
+  margin: 100px 300px;
+  padding: 30px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.example-stepper {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}

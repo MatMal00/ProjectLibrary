@@ -1,0 +1,96 @@
+<ng-container>
+  <div class="title-container">
+    <h3 class="page-title">RENT</h3>
+    <h4 class="page-subtitle">- Order -</h4>
+  </div>
+</ng-container>
+
+<div class="wrapper">
+  <mat-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>First Name</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="First Name" formControlName="firstName" required />
+        </mat-form-field>
+        <div>
+          <p>Go to next step</p>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" errorMessage="Last Name is required.">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Last Name</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Last Name" formControlName="lastName" required />
+        </mat-form-field>
+        <div>
+          <p>Go to next step</p>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" errorMessage="Time Rent is required">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Time Rent</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input formControlName="startDate" matStartDate placeholder="Start date" required />
+            <input formControlName="endDate" matEndDate placeholder="End date" required />
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+
+        <div>
+          <p>Go to next step</p>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fourthFormGroup" errorMessage="Email is required.">
+      <form [formGroup]="fourthFormGroup">
+        <ng-template matStepLabel>Email</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Ex. pat@example.com" formControlName="email" required />
+        </mat-form-field>
+        <div>
+          <p>Go to next step</p>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fifthFormGroup" errorMessage="Address is required.">
+      <form [formGroup]="fifthFormGroup">
+        <ng-template matStepLabel>Adress</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="address" required />
+        </mat-form-field>
+        <div>
+          <p>Go to next step</p>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>BACK</button>
+        <button mat-raised-button color="warn" (click)="rentBook()">RENT</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>
+
+<!-- (click)="stepper.reset() -->

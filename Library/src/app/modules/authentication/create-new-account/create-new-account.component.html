@@ -1,0 +1,29 @@
+<form class="wrapper" [formGroup]="createAccountForm" (ngSubmit)="createUserSubmit()">
+  <h1 class="text-center">Create Account</h1>
+  <mat-form-field class="field">
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstName" />
+    <mat-error class="error" *ngIf="form['firstName'].hasError('required')"> First Name is required </mat-error>
+  </mat-form-field>
+  <mat-form-field class="field">
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastName" />
+    <mat-error class="error" *ngIf="form['lastName'].hasError('required')"> Last Name is required </mat-error>
+  </mat-form-field>
+  <mat-form-field class="field" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput required placeholder="Ex. pat@example.com" formControlName="email" />
+    <mat-error class="error" *ngIf="form['email'].hasError('required')"> Email is required </mat-error>
+    <mat-error class="error" *ngIf="form['email'].hasError('email') && !form['email'].hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="field">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput required formControlName="password" />
+    <mat-error class="error" *ngIf="form['password'].hasError('required')"> New Password is required </mat-error>
+  </mat-form-field>
+  <div class="example-button-row">
+    <button mat-raised-button type="submit" color="warn" class="button">SIGN UP</button>
+  </div>
+</form>

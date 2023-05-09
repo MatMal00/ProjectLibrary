@@ -1,0 +1,76 @@
+<ng-container>
+  <div class="title-container">
+    <h3 class="page-title">PAYMENT</h3>
+    <h4 class="page-subtitle">- Order -</h4>
+  </div>
+</ng-container>
+
+<div class="wrapper">
+  <mat-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>First Name</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="First Name" formControlName="firstName" required />
+        </mat-form-field>
+        <div>
+          <p>Go to next step</p>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" errorMessage="Last Name is required.">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Last Name</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Last Name" formControlName="lastName" required />
+        </mat-form-field>
+        <div>
+          <p>Go to next step</p>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" errorMessage="Email is required.">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Email</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Ex. pat@example.com" formControlName="email" required />
+        </mat-form-field>
+        <div>
+          <p>Go to next step</p>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fourthFormGroup" errorMessage="Address is required.">
+      <form [formGroup]="fourthFormGroup">
+        <ng-template matStepLabel>Adress</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="address" required />
+        </mat-form-field>
+        <div>
+          <p>Go to next step</p>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>BACK</button>
+        <button mat-raised-button color="warn" (click)="buyBook()">BUY</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>
+
+<!-- (click)="stepper.reset() -->

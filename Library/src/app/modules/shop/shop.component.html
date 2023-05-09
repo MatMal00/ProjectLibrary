@@ -1,0 +1,52 @@
+<ng-container>
+  <div class="title-container">
+    <h3 class="page-title">ONLINE SHOP</h3>
+    <h4 class="page-subtitle">- Check our offer -</h4>
+  </div>
+
+  <mat-form-field class="field" appearance="fill">
+    <mat-label>-- Choose Category --</mat-label>
+    <mat-select [formControl]="selectFormControl">
+      <mat-option *ngFor="let book of categories" [value]="book.categoryName">
+        {{ book.categoryName | capitalLetterFirst }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="box-container">
+    <div class="box" *ngFor="let book of books">
+      <div class="image">
+        <img src="{{ book.imageUrl }}" alt="book" />
+      </div>
+
+      <div class="info">
+        <h3 class="title">"{{ book.title }}"</h3>
+        <h3 class="title">Author: {{ book.author }}</h3>
+        <div class="subinfo">
+          <div class="price">{{ book.price }} zł</div>
+          <div class="stars">
+            <img src="../../../assets/icons/grade_FILL1_wght400_GRAD0_opsz48.svg" />
+            <img src="../../../assets/icons/grade_FILL1_wght400_GRAD0_opsz48.svg" />
+            <img src="../../../assets/icons/grade_FILL1_wght400_GRAD0_opsz48.svg" />
+            <img src="../../../assets/icons/grade_FILL1_wght400_GRAD0_opsz48.svg" />
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay">
+        <img
+          *ngIf="userLogin?.id"
+          (click)="addToBasketForBuy(book)"
+          src="../../../assets/icons/shopping_cart_FILL0_wght400_GRAD0_opsz48.svg"
+          matTooltip="Add To Basket"
+        />
+        <img
+          *ngIf="userLogin?.role?.roleName === 'admin' && userLogin?.id"
+          (click)="editMode(book)"
+          src="../../../assets/icons/edit_FILL0_wght400_GRAD0_opsz48.svg"
+          matTooltip="Edit Book"
+        />
+      </div>
+    </div>
+  </div>
+</ng-container>

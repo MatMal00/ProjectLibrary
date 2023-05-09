@@ -1,0 +1,68 @@
+<div class="title-container">
+  <h3 class="page-title">Your Basket</h3>
+  <h4 class="page-subtitle">- Make an order -</h4>
+</div>
+
+<div class="wrapper">
+  <div class="wrapper-table">
+    <table mat-table [dataSource]="dataSource" class="table" matSort (matSortChange)="announceSortChange($event)">
+      <ng-container matColumnDef="imageUrl">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Book</th>
+        <td mat-cell *matCellDef="let order">
+          <div class="image">
+            <img src="{{ order.imageUrl }}" alt="book" />
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+        <td mat-cell *matCellDef="let order">{{ order.title }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Author</th>
+        <td mat-cell *matCellDef="let order">{{ order.author }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="categoryName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+        <td mat-cell *matCellDef="let order">{{ order.categoryName | capitalLetterFirst }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+        <td mat-cell *matCellDef="let order">{{ order.price }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+        <td mat-cell *matCellDef="let order">
+          <button class="btn-header-icon" matTooltip="Delete User" (click)="removeFromBasket(order.id)">
+            <img src="../../../assets/icons/delete.svg" />
+          </button>
+          <button
+            *ngIf="!order.isRentable"
+            class="btn-header-icon"
+            matTooltip="Go To Payment"
+            (click)="goToPayment(order.id)"
+            [routerLink]="['/OrderStepperPayment']"
+          >
+            <img src="../../../assets/icons/payments_FILL0_wght400_GRAD0_opsz24.svg" />
+          </button>
+          <button
+            *ngIf="order.isRentable"
+            class="btn-header-icon"
+            matTooltip="Rent Book"
+            (click)="goToRent(order.id)"
+            [routerLink]="['/OrderStepperRent']"
+          >
+            <img src="../../../../assets/icons/menu_book_FILL0_wght400_GRAD0_opsz24.svg" />
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

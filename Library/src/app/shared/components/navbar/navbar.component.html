@@ -1,0 +1,38 @@
+<header class="header">
+  <div>
+    <img src="../../../../assets/icons/menu_book_FILL1_wght300_GRAD0_opsz40 (1).svg" alt="" />
+    <p>Library Shop</p>
+  </div>
+  <nav class="nav">
+    <ul class="nav__tabs">
+      <li class="nav__tabs--link"><a [routerLink]="['/']">Home Page</a></li>
+      <li *ngIf="userLogin?.role?.roleName === 'admin' && userLogin?.id" class="nav__tabs--link">
+        <a [routerLink]="['/Admin']">Admin Panel</a>
+      </li>
+      <li class="nav__tabs--link">
+        <a [routerLink]="['/Rental']">Rental</a>
+      </li>
+      <li class="nav__tabs--link"><a [routerLink]="['/Shop']">Online Shop</a></li>
+
+      <a *ngIf="userLogin?.id" [routerLink]="['/ShoppingBasket']">
+        <button
+          mat-mini-fab
+          class="basket-button"
+          matTooltip="Basket"
+          matBadge="{{ productsInBasket }}"
+          matBadgeColor="warn"
+        >
+          <img
+            class="basket-icon"
+            src="../../../../assets/icons/shopping_cart_FILL0_wght400_GRAD0_opsz24 (1).svg"
+            alt=""
+          /></button
+      ></a>
+
+      <a *ngIf="!userLogin?.id" [routerLink]="['/login']"><button class="nav__tabs--button">Sign In</button></a>
+      <a *ngIf="userLogin?.id" [routerLink]="['/login']" (click)="signOut()"
+        ><button class="nav__tabs--button">Sign Out</button></a
+      >
+    </ul>
+  </nav>
+</header>

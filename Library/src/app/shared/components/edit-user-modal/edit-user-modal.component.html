@@ -1,0 +1,30 @@
+<form class="wrapper" [formGroup]="editUserForm">
+  <h1 class="text-center">Edit User</h1>
+  <div class="firstColumn">
+    <mat-form-field class="field">
+      <mat-label>First Name</mat-label>
+      <input type="text" matInput formControlName="firstName" />
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastname" />
+    </mat-form-field>
+  </div>
+  <div class="secondColumn">
+    <mat-form-field class="field">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="roleName">
+        <mat-option *ngFor="let role of userRoles" [value]="role.roleName"
+          >{{ role.roleName | capitalLetterFirst }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>Email</mat-label>
+      <input type="text" matInput formControlName="email" />
+    </mat-form-field>
+  </div>
+  <div class="wrapper-button">
+    <button class="btn2" (click)="save(modalValues.id)">Save</button>
+  </div>
+</form>
