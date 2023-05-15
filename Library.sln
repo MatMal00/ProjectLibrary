@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Library", "Library\Library.esproj", "{16C0776A-483F-4A2B-AD25-7F609CAFF1A3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F8316022-3810-4F71-9291-2F6B1709EFFE} = {F8316022-3810-4F71-9291-2F6B1709EFFE}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryBackend", "LibraryBackend\LibraryBackend.csproj", "{F8316022-3810-4F71-9291-2F6B1709EFFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryBackend", "LibraryBackend\LibraryBackend.csproj", "{F8316022-3810-4F71-9291-2F6B1709EFFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
