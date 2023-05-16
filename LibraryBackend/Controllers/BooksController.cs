@@ -5,6 +5,7 @@ using LibraryBackend.Context;
 using LibraryBackend.ResponseModels;
 using LibraryBackend.Mappers;
 using LibraryBackend.RequestModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryBackend.Controllers
 {
@@ -96,6 +97,7 @@ namespace LibraryBackend.Controllers
         }
 
         // DELETE: api/Books/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {

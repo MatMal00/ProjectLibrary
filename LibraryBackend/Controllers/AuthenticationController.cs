@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibraryBackend.Models;
 using LibraryBackend.Context;
 using LibraryBackend.RequestModels;
 using LibraryBackend.ResponseModels;
 using System.Text;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace LibraryBackend.Controllers
 {
@@ -18,10 +16,12 @@ namespace LibraryBackend.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly LibraryContext _context;
+        IConfiguration _configuration;
 
-        public AuthenticationController(LibraryContext context)
+        public AuthenticationController(LibraryContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         [HttpPost("login")]
@@ -35,7 +35,28 @@ namespace LibraryBackend.Controllers
 
             var role = await _context.Roles.FindAsync(user.RoleId);
 
-            return new LoginResponse() { Id = user.Id, Email = user.Email, FirstName = user.FirstName, Lastname = user.Lastname, Role = role };
+
+            var claims = new[] {
+                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                        new Claim("UserId", user.Id.ToString()),
+                        new Claim("UserName", user.FirstName + " " + user.Lastname),
+                        new Claim("Email", user.Email)
+                    };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                _configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                claims,
+                expires: DateTime.Now.AddMinutes(20),
+                signingCredentials: signIn);
+
+            var userToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return new LoginResponse() { Id = user.Id, Email = user.Email, FirstName = user.FirstName, Lastname = user.Lastname, Role = role, AccessToken = userToken, AccessTokenExpires = DateTime.Now.AddMinutes(10) };
         }
 
         [HttpPost("register")]
