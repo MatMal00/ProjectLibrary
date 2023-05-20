@@ -5,6 +5,7 @@ using LibraryBackend.Models;
 using LibraryBackend.ResponseModels;
 using LibraryBackend.RequestModels;
 using LibraryBackend.Mappers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryBackend.Controllers
 {
@@ -84,6 +85,7 @@ namespace LibraryBackend.Controllers
 
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrder(int id, OrderPutRequest order)
         {
@@ -117,6 +119,7 @@ namespace LibraryBackend.Controllers
 
         // POST: api/Orders
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(OrderPostRequest order)
         {
@@ -140,6 +143,7 @@ namespace LibraryBackend.Controllers
         }
 
         // DELETE: api/Orders/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {

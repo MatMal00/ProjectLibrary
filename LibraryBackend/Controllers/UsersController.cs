@@ -9,6 +9,7 @@ using LibraryBackend.Context;
 using LibraryBackend.Models;
 using LibraryBackend.ResponseModels;
 using LibraryBackend.RequestModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryBackend.Controllers
 {
@@ -42,6 +43,7 @@ namespace LibraryBackend.Controllers
 
         // PUT: api/Users1/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, UserPutRequest user)
         {
@@ -83,6 +85,7 @@ namespace LibraryBackend.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

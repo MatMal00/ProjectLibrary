@@ -10,6 +10,7 @@ using LibraryBackend.Models;
 using LibraryBackend.Mappers;
 using LibraryBackend.ResponseModels;
 using LibraryBackend.RequestModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryBackend.Controllers
 {
@@ -82,6 +83,7 @@ namespace LibraryBackend.Controllers
 
         // PUT: api/RentedBooks/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("return/{id}")]
         public async Task<IActionResult> ReturnBook(int id)
         {
@@ -120,6 +122,7 @@ namespace LibraryBackend.Controllers
 
         // POST: api/RentedBooks
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> PostRentedBook(OrderPostRequest rentedBook)
         {
