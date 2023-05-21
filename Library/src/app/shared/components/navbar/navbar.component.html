@@ -6,7 +6,7 @@
   <nav class="nav">
     <ul class="nav__tabs">
       <li class="nav__tabs--link"><a [routerLink]="['/']">Home Page</a></li>
-      <li *ngIf="userLogin?.role?.roleName === 'admin' && userLogin?.id" class="nav__tabs--link">
+      <li *ngIf="userLogin?.role?.roleName === 'admin' && authorizationToken" class="nav__tabs--link">
         <a [routerLink]="['/Admin']">Admin Panel</a>
       </li>
       <li class="nav__tabs--link">
@@ -14,7 +14,7 @@
       </li>
       <li class="nav__tabs--link"><a [routerLink]="['/Shop']">Online Shop</a></li>
 
-      <a *ngIf="userLogin?.id" [routerLink]="['/ShoppingBasket']">
+      <a *ngIf="authorizationToken" [routerLink]="['/ShoppingBasket']">
         <button
           mat-mini-fab
           class="basket-button"
@@ -29,8 +29,8 @@
           /></button
       ></a>
 
-      <a *ngIf="!userLogin?.id" [routerLink]="['/login']"><button class="nav__tabs--button">Sign In</button></a>
-      <a *ngIf="userLogin?.id" [routerLink]="['/login']" (click)="signOut()"
+      <a *ngIf="!authorizationToken" [routerLink]="['/login']"><button class="nav__tabs--button">Sign In</button></a>
+      <a *ngIf="authorizationToken" [routerLink]="['/login']" (click)="signOut()"
         ><button class="nav__tabs--button">Sign Out</button></a
       >
     </ul>
